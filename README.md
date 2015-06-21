@@ -10,8 +10,6 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 for more details on the data please go to the link provided above
 
 
-The Script : 
-
 The Script that does the following :
 - Merges the training and the test sets to create one data set.
 - Extracts only the measurements on the mean and standard deviation for each measurement. 
