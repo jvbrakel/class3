@@ -2,15 +2,11 @@
       ## Human Activity Recognition Using Smartphones Data Set 
       ## which can be found at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
       ## 
-      ## this script merges the training dataset and merges it with the test dataset, which is saved in 
-      ## the xx which is a dataframe
+      ## this script merges the training dataset and merges it with the test dataset
+      ## Thee results are summarized into tidySumarizedData 
       ##
-      ##
-      
-      
-      ##  This function creates a special "matrix" object that can cache its inverse
       ##  this script uses the reshape2 library , which you can install with 'install.packages("reshape2")'      
-      ##  this script uses the dplyr library , which you can install with 'install.packages("dplyr")'      
+      ##  this script uses the dplyr library, which you can install with 'install.packages("dplyr")'      
 
       library(reshape2)
       library(dplyr)
@@ -49,15 +45,14 @@
       # combine test and train dataset into combinedData
       combinedData<-rbind(traincombined,testcombined)
       
-      # add descriptive names for activity
+      # load descriptive names for activity and merge descriptive names with dataset
       activityTables <- read.table("activity_labels.txt")
       colnames(activityTables)<-c ("activity","activitydesc")
       combinedData <- merge(combinedData,activityTables,by="activity")
-      columnDataName$V1 = as.numeric(as.character(columnDataName$V1))
       
-      # filter dataset on columns which contain mean, standard deviation and activity 
+      # filter dataset on columns which related to mean, standard deviation, activity and subject
       # create tidyData, which contains a skinny dataset grouping subject, activity and variable
-      # which is summarized in a list by subject, activity and mean of the variables
+      # which is summarized by subject, activity and mean of the variables in to tidySumarizedData
       
       relevantData<- combinedData[,grepl('mean|std|activitydesc|subject', colnames(combinedData))]
       tidyLongData <- melt(relevantData,id=subset(colnames(relevantData),grepl('activitydesc|subject', colnames(relevantData))),measures.vars=subset(colnames(relevantData),grepl('mean|std', colnames(relevantData))))
