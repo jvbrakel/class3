@@ -58,4 +58,4 @@
       tidyLongData <- melt(relevantData,id=subset(colnames(relevantData),grepl('activitydesc|subject', colnames(relevantData))),measures.vars=subset(colnames(relevantData),grepl('mean|std', colnames(relevantData))))
       tidySumarizedData<-summarize(group_by(tidyLongData,activitydesc,subject,variable), average = mean(value,na.rm=TRUE))
       
-      
+      write.table(tidySumarizedData,"tidydata.txt", row.name=FALSE)
